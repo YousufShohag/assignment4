@@ -1,3 +1,50 @@
+
+<?php
+  //! IT'S CONNECTED FOR SESSION
+  require_once '../session.php';
+
+  //! IT'S CONNECTED FOR AUTOLOAD
+  require_once '../vendor/autoload.php';
+ 
+
+
+  $getUserObjects = new App\Auth\Users();
+
+  // $id = $_GET['costomerId'];
+  // print_r($id);
+  
+
+  // if (isset($_GET['costomerId'])) {
+  //   //$id = $_GET['costomerId'];
+  //   // var_dump($id);
+  //   $getUserObject = $getUserObjects->showUserInformation();
+  
+  // }
+  // $getUserObject = $getUserObjects->showUserInformation();
+  
+  //   print_r($getUserObject);
+
+  $transectionsObject = new App\Classes\Customer\Transfer();
+  $id = $_GET['costomerId'];
+
+  if (isset($_GET['costomerId'])) {
+    $transections = $transectionsObject->showCustomerTransfer($id);
+  
+  }
+// echo "<pre>";
+//   var_dump($transections);
+//   echo "</pre>";
+//echo $transections['transfer_name'];
+
+?>
+
+<?php
+
+                      
+
+                      
+                      ?>
+
 <!DOCTYPE html>
 <html
   class="h-full bg-gray-100"
@@ -51,12 +98,12 @@
                   <div class="flex space-x-4">
                     <!-- Current: "bg-sky-700 text-white", Default: "text-white hover:bg-sky-500 hover:bg-opacity-75" -->
                     <a
-                      href="./customers.html"
+                      href="./customers.php"
                       class="text-white hover:bg-sky-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
                       >Customers</a
                     >
                     <a
-                      href="./transactions.html"
+                      href="./transactions.php"
                       class="text-white hover:bg-sky-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
                       >Transactions</a
                     >
@@ -224,7 +271,7 @@
         <header class="py-10">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold tracking-tight text-white">
-              Transactions of Al Nahian
+             CUSTOMER NAME
             </h1>
           </div>
         </header>
@@ -238,7 +285,7 @@
               <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                   <p class="mt-2 text-sm text-gray-700">
-                    List of transactions made by Al Nahian.
+                    <!-- <?php echo $_SESSION['user_name']; ?> -->
                   </p>
                 </div>
               </div>
@@ -272,98 +319,29 @@
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
-                        <tr>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                            Bruce Wayne
-                          </td>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                            bruce@wayne.com
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                            +$10,240
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                            29 Sep 2023, 09:25 AM
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                            Al Nahian
-                          </td>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                            alnahian@2003.com
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                            -$2,500
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                            15 Sep 2023, 06:14 PM
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                            Muhammad Alp Arslan
-                          </td>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                            alp@arslan.com
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                            +$49,556
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                            03 Jul 2023, 12:55 AM
-                          </td>
-                        </tr>
+                      <?php foreach($transections as $transection): ?>
 
-                        <tr>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                            Povilas Korop
-                          </td>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                            povilas@korop.com
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                            +$6,125
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                            07 Jun 2023, 10:00 PM
-                          </td>
-                        </tr>
+                      <tr>
+                        <td
+                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
+                        <?= $transection['transfer_name'] ?>
+                        </td>
+                        <td
+                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
+                        <?= $transection['transfer_email'] ?>
+                        </td>
+                        <td
+                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
+                        <?= $transection['transfer_amount'] ?>
+                        </td>
+                        <td
+                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
+                        <?= $transection['date'] ?>
+                        </td>
+                      </tr>
 
-                        <tr>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                            Martin Joo
-                          </td>
-                          <td
-                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                            martin@joo.com
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                            -$125
-                          </td>
-                          <td
-                            class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                            02 Feb 2023, 8:30 PM
-                          </td>
-                        </tr>
+                      <?php endforeach; ?>
+                        
                       </tbody>
                     </table>
                   </div>

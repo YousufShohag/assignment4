@@ -326,12 +326,12 @@
                       </thead>
 
                       
-                      <!-- <tbody class="divide-y divide-gray-200 bg-white">
+                      <tbody class="divide-y divide-gray-200 bg-white">
                       <?php
 
-                      // $db = new App\Classes\Deposit\CustomerTransfer();
+                      $transectionsObject = new App\Classes\Customer\Transfer();
 
-                      // $transections = $db->showTransfer();
+                      $transections = $transectionsObject->showTransfer();
                       ?>
 
                             <?php foreach($transections as $transection): ?>
@@ -339,20 +339,24 @@
                             <tr>
                               <td
                               class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                              <?= $transection['id'] ?>
+                              <?= $transection['transfer_name'] ?>
                               </td>
                               <td
                               class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                              <?= $transection['email'] ?>
+                              <?= $transection['transfer_email'] ?>
                               </td>
                               <td
                               class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                              <?= $transection['transferMoney'] ?>
+                              <?= $transection['transfer_amount'] ?>
+                              </td>
+                              <td
+                              class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
+                              <?= $transection['date'] ?>
                               </td>
                             </tr>
 
                             <?php endforeach; ?>
-                      </tbody> -->
+                      </tbody> 
                     </table>
                   </div>
                 </div>

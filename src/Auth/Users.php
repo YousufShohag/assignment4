@@ -87,4 +87,52 @@ class Users
             echo $e->getMessage();
         }
     }
+    public function showCustomer(){
+       
+        try {
+            //$customer_id = $_SESSION['user_id'];  //! Check Which Customer Logged or Customer ID
+            $sql = "SELECT * FROM users WHERE role='customer'";
+            $stmt = $this->db->conn->prepare($sql);
+           // $stmt->bindParam(':id', $customer_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $customers;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function showUserInformation($id){
+       
+        try {
+           
+            $sql = "SELECT  FROM users WHERE md5(id) = '$id'";
+            var_dump($sql);
+            $stmt = $this->db->conn->prepare($sql);
+            $stmt->execute();
+            $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $transactions;
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    // public function showUserInformation(){
+    //             try {
+           
+    //                 $sql = "SELECT  users.name, customer_transfer.customer_id 
+    //                 FORM users
+    //                 LEFT JOIN customer_transfer ON users.id = customer_transfer.customer_id
+    //                 ORDER BY users.name";
+    //                // var_dump($sql);
+
+    //                 $stmt = $this->db->conn->prepare($sql);
+    //                 $stmt->execute();
+    //                 $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //                 return $transactions;
+        
+    //             } catch (PDOException $e) {
+    //                 echo "Error: " . $e->getMessage();
+    //             }
+    // }
 }

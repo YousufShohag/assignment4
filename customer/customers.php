@@ -1,3 +1,14 @@
+<?php
+  //! IT'S CONNECTED FOR SESSION
+  require_once '../session.php';
+
+  //! IT'S CONNECTED FOR AUTOLOAD
+  require_once '../vendor/autoload.php';
+ 
+?>
+
+
+
 <!DOCTYPE html>
 <html
   class="h-full bg-gray-100"
@@ -259,6 +270,16 @@
                   <ul
                     role="list"
                     class="divide-y divide-gray-100">
+
+                    <?php
+                      $customerObject = new App\Auth\Users();
+
+                      $customers = $customerObject->showCustomer();
+                      // echo "<pre>";
+                      // var_dump($customers);
+                      // echo "</pre>";
+                      ?>
+                    <?php foreach($customers as $customer): ?>
                     <li
                       class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
                       <div class="flex gap-x-4">
@@ -267,208 +288,42 @@
                           class="flex-none w-12 h-12 rounded-full bg-gray-50"
                           src="https://avatars.githubusercontent.com/u/61485238"
                           alt="Al Nahian" /> -->
-                        <span
-                          class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-500">
+                        
                           <span
-                            class="text-xl font-medium leading-none text-white"
-                            >AN</span
-                          >
-                        </span>
-
-                        <div class="flex-auto min-w-0">
-                          <p
-                            class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
-                              <span
-                                class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Al Nahian
-                            </a>
-                          </p>
-                          <p class="flex mt-1 text-xs leading-5 text-gray-500">
-                            <a
-                              href="./customer_transactions.html"
-                              class="relative truncate hover:underline"
-                              >alnahian@2003.com</a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li
-                      class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
-                      <div class="flex gap-x-4">
-                        <!-- Use Image or Name Initials -->
-                        <!-- <img
-                          class="flex-none w-12 h-12 rounded-full bg-gray-50"
-                          src="https://avatars.githubusercontent.com/u/44245907"
-                          alt="Muntaser Muttaqi" /> -->
-                        <span
                           class="inline-flex items-center justify-center w-12 h-12 bg-purple-500 rounded-full">
-                          <span
-                            class="text-xl font-medium leading-none text-white"
-                            >MM</span
-                          >
+                          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                            <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                        </svg>
+                          
                         </span>
                         <div class="flex-auto min-w-0">
                           <p
                             class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
+                            <a href="./customer_transactions.php?costomerId=<?php echo md5($customer['id']); ?>" value="<?php echo $customer['name']; ?>">
                               <span
                                 class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Muntaser Muttaqi
+                                <?php echo $customer['name']; ?>
                             </a>
                           </p>
                           <p class="flex mt-1 text-xs leading-5 text-gray-500">
                             <a
-                              href="./customer_transactions.html"
+                              href="./customer_transactions.php?costomerId=<?php echo md5($customer['id']); ?>"
                               class="relative truncate hover:underline"
-                              >muntaser@muttaqi.com</a
+                              ><?php echo $customer['email']; ?></a
                             >
                           </p>
                         </div>
                       </div>
                     </li>
+    
+                    <?php endforeach; ?>
+                    
 
-                    <li
-                      class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
-                      <div class="flex gap-x-4">
-                        <!-- <img
-                          class="flex-none w-12 h-12 rounded-full bg-gray-50"
-                          src="https://avatars.githubusercontent.com/u/1510147"
-                          alt="Povilas Korop" /> -->
-                        <span
-                          class="inline-flex items-center justify-center w-12 h-12 bg-teal-500 rounded-full">
-                          <span
-                            class="text-xl font-medium leading-none text-white"
-                            >PK</span
-                          >
-                        </span>
-                        <div class="flex-auto min-w-0">
-                          <p
-                            class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
-                              <span
-                                class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Povilas Korop
-                            </a>
-                          </p>
-                          <p class="flex mt-1 text-xs leading-5 text-gray-500">
-                            <a
-                              href="./customer_transactions.html"
-                              class="relative truncate hover:underline"
-                              >povilas@korop.com</a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </li>
+                    
 
-                    <li
-                      class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
-                      <div class="flex gap-x-4">
-                        <!-- Use Avatar or Name Initials -->
-                        <!-- <img
-                          class="flex-none w-12 h-12 rounded-full bg-gray-50"
-                          src="https://avatars.githubusercontent.com/u/958072"
-                          alt="Laravel Framework" /> -->
-                        <span
-                          class="inline-flex items-center justify-center w-12 h-12 bg-red-500 rounded-full">
-                          <span
-                            class="text-xl font-medium leading-none text-white"
-                            >LF</span
-                          >
-                        </span>
-                        <div class="flex-auto min-w-0">
-                          <p
-                            class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
-                              <span
-                                class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Laravel Framework
-                            </a>
-                          </p>
-                          <p class="flex mt-1 text-xs leading-5 text-gray-500">
-                            <a
-                              href="./customer_transactions.html"
-                              class="relative truncate hover:underline"
-                              >laravel@framework.com</a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </li>
+                    
 
-                    <li
-                      class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
-                      <div class="flex gap-x-4">
-                        <!-- Use Avatar or Name Initials -->
-                        <!-- <img
-                          class="flex-none w-12 h-12 rounded-full bg-gray-50"
-                          src="https://avatars.githubusercontent.com/u/183223"
-                          alt="Jeffrey Way" /> -->
-                        <span
-                          class="inline-flex items-center justify-center w-12 h-12 bg-blue-500 rounded-full">
-                          <span
-                            class="text-xl font-medium leading-none text-white"
-                            >JW</span
-                          >
-                        </span>
-                        <div class="flex-auto min-w-0">
-                          <p
-                            class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
-                              <span
-                                class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Jeffrey Way
-                            </a>
-                          </p>
-                          <p class="flex mt-1 text-xs leading-5 text-gray-500">
-                            <a
-                              href="./customer_transactions.html"
-                              class="relative truncate hover:underline"
-                              >jeffrey@way.com</a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li
-                      class="relative flex justify-between px-4 py-5 gap-x-6 hover:bg-gray-50 sm:px-6 lg:px-8">
-                      <div class="flex gap-x-4">
-                        <!-- Use Avatar or Name Initilas -->
-                        <!-- <img
-                          class="flex-none w-12 h-12 rounded-full bg-gray-50"
-                          src="https://avatars.githubusercontent.com/u/1692996?v=4"
-                          alt="Alex Garrett-Smith" /> -->
-
-                        <span
-                          class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500">
-                          <span
-                            class="text-xl font-medium leading-none text-white"
-                            >AG</span
-                          >
-                        </span>
-                        <div class="flex-auto min-w-0">
-                          <p
-                            class="text-sm font-semibold leading-6 text-gray-900">
-                            <a href="./customer_transactions.html">
-                              <span
-                                class="absolute inset-x-0 bottom-0 -top-px"></span>
-                              Alex Garrett-Smith
-                            </a>
-                          </p>
-                          <p class="flex mt-1 text-xs leading-5 text-gray-500">
-                            <a
-                              href="./customer_transactions.html"
-                              class="relative truncate hover:underline"
-                              >alex@smith.com</a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </li>
+                    
                   </ul>
                 </div>
               </div>
